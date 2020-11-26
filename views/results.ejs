@@ -6,7 +6,10 @@
                     <input type="text" placeholder="Type keyword" name="keyword"/></input>
                     <button>Search</button>
                     <br><br>
-                    </form>
+                    <% imageUrlArray.forEach(function(imageUrl){ %>
+                        <img src='<%= imageUrl %>' width='200' height='200'/>
+                    <% }); %>
+                </form>
         </main>
 <%- include('partials/footer.ejs') %>
     </body>
