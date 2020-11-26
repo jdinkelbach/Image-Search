@@ -1,13 +1,17 @@
 <%- include('partials/header.ejs') %>
     <body>
         <main>
-                <h1>Images</h1>
+                <h1>Unsplash Image Search</h1>
                 <form action="/search">
                     <input type="text" placeholder="Type keyword" name="keyword"/></input>
                     <button>Search</button>
                     <br><br>
-                    <% imageUrlArray.forEach(function(imageUrl){ %>
-                        <img src='<%= imageUrl %>' width='200' height='200'/>
+                    <% imageUrlArray.forEach(function(imageUrl, i){ %>
+                        <%- (i % 3 == 0)?'<br>':'' %>
+                            <div class="img-frame">
+                                <img src='<%= imageUrl %>' width='200' height='200'/><br>
+                                <i class="fas fa-heart favoriteIcon"></i>
+                            </div>
                     <% }); %>
                 </form>
         </main>

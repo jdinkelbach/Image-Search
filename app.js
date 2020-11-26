@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 app.set("view engine", "ejs");
 
 // Identify public folder as the folder for all static files
-app.set(express.static("public"));
+app.use(express.static("public"));
 
 // Routes
 app.get("/", async function(req, res){
