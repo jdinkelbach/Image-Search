@@ -43,9 +43,12 @@ $(document).ready(function(){
         // Display images
         $("#favorites").html("");
         let htmlString = "";
-        data.forEach(function(row){
+        data.forEach(function(row, i){
             htmlString += "<div class='img-frame'><img class='image' src='"+ row.imageURL +"' width='200' height='200'><br>";
             htmlString += "<i class='fas fa-heart favoriteIcon'></i></div>";
+            if ((i + 1) % 4 == 0 ){
+                htmlString += "<br><br>";
+            }
         });
         $("#favorites").append(htmlString);
         $(".favoriteIcon").css("color", "red");
