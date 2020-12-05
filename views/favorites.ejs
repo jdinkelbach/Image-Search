@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs') %>
+    <body>
+        <main>
+                <h1 class="bg-white text-dark py-2 my-0">Image Search</h1>
+                <form action="/search">
+                    <div class="bg-white text-dar py-3 d-flex justify-content-between px-5">
+                        <!-- Keyword Links -->
+                        <div class="d-flex">
+                            <strong class="pr-2">My Favorites:</strong> 
+                            <% rows.forEach(function(row, i){ %>
+                                <a class="keywordLink text-white d-inline rounded px-1 mx-1 bg-dark" href="#"><%= row["keyword"] %></a>
+                                <%- (i % 6 == 0)?'<br>':'' %>
+                            <% }); %>
+                        </div>
+                        <div id="favorites">
+                            <input type="hidden" id="keywordSelected">
+                        </div>
+                        <div>
+                            <input type="text" class="rounded bg-faded text-center" placeholder="Enter A Keyword" name="keyword"/></input>
+                            <button type="submit" class="rounded bg-dark text-white mx-2"><strong>Back to Search <i class="fas fa-search"></i></strong></button>
+                        </div>
+                    </div>
+
+                </form>
+        </main>
+<%- include('partials/footer.ejs') %>
+    </body>
+</html>

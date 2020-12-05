@@ -1,12 +1,16 @@
 <%- include('partials/header.ejs') %>
     <body>
         <main>
-                <h1>Images</h1>
+                <h1 class="bg-white text-dark py-2 my-0">Image Search</h1>
                 <form action="/search">
-                    <input type="text" placeholder="Type keyword" name="keyword"/></input>
-                    <button>Search </button>
-                    <br><br>
-                    </form>
+                    <div class="bg-white text-dar py-3 d-flex justify-content-between px-5">
+                        <a href="/getKeywords"><strong><i class="fas fa-heart text-danger"></i> My Favorites</strong></a>
+                        <div>
+                            <input type="text" class="rounded bg-faded text-center" placeholder="Enter A Keyword" name="keyword"/></input>
+                            <button type="submit" class="rounded bg-dark text-white mx-2"><strong>Search <i class="fas fa-search"></i></strong></button>
+                        </div>
+                    </div>
+                </form>
         </main>
 <%- include('partials/footer.ejs') %>
     </body>
