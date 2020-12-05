@@ -3,7 +3,7 @@
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
-const pool = require("./dbPool.js");
+const pool = require("./dbPool.js")
 
 // Set the view engine as ejs
 app.set("view engine", "ejs");
@@ -14,11 +14,22 @@ app.use(express.static("public"));
 // Routes
 app.get("/", async function(req, res){
     // Fetch random background from Unsplash
-    let url = `https://api.unsplash.com/photos/random/?&client_id=7WEnZ0-HH3el9avQVajOeFDCW3rKQBj-LmaxAk6I6GY`;
+    let url = `https://api.unsplash.com/photos/random/?&client_id=GBUwIJMyMSNx7a8vfuwO4JPnI_1mOmD3pXiKUNEksB0`;
     let response = await fetch(url);
     let data = await response.json();
     res.render("index", {"imageUrl": data.urls.small});
 });
+
+// Route for viewing favorite images
+app.get("/getKeywords",  function(req, res) {
+  let sql = "SELECT DISTINCT keyword FROM favorites ORDER BY keyword";
+  let imageUrl = ["img/favorite.png"];
+  pool.query(sql, function (err, rows, fields) {
+     if (err) throw err;
+     console.log(rows);
+     res.render("favorites", {"imageUrl": imageUrl, "rows":rows});
+  });  
+});//getKeywords
 
 // Search Route
 app.get("/search", async function(req, res){
@@ -26,7 +37,7 @@ app.get("/search", async function(req, res){
     if (req.query.keyword){
         keyword = req.query.keyword;
     }
-    let url = `https://api.unsplash.com/photos/random/?count=9&client_id=7WEnZ0-HH3el9avQVajOeFDCW3rKQBj-LmaxAk6I6GY&featured=true&orientation=landscape&query=${keyword}`;
+    let url = `https://api.unsplash.com/photos/random/?count=9&client_id=GBUwIJMyMSNx7a8vfuwO4JPnI_1mOmD3pXiKUNEksB0&featured=true&orientation=landscape&query=${keyword}`;
     let response = await fetch(url);
     let data = await response.json();
     
@@ -56,6 +67,7 @@ app.get("/api/updateFavorites", function(req, res){
     console.log(rows);
     res.send(rows.affectedRows.toString());
   });
+    
 });//api/updateFavorites
 
 // Start server
