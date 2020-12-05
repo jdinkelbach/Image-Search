@@ -1,16 +1,9 @@
-body{
-    background-image: url("<%= imageUrl %>");
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
-}
-
 .img-frame{
     background-color: white;
     color: blue;
     display: inline-block;
     border: 10px solid white;
-    margin: 1%;
+    margin: 2%;
     box-shadow: 0 6px 6px rgba(0,0,0,0.05);
 }
 
@@ -20,11 +13,23 @@ body{
 }
 
 a{
-    color: rgb(255, 0, 0);
+    color: #343a40;
 }
-
 
 a:hover{
     text-decoration: none;
     color: red!important;
+}
+
+.keywordLink{
+    font-weight: 600;
+}
+
+footer{
+    color: #343a40;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    padding: .5% 0;
 }
