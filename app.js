@@ -11,6 +11,11 @@ app.set("view engine", "ejs");
 // Identify public folder as the folder for all static files
 app.use(express.static("public"));
 
+// Start server
+app.listen(process.env.PORT, process.env.IP, function(){
+    console.log("Express server is running...");
+});
+
 // Routes
 app.get("/", async function(req, res){
     // Fetch random background from Unsplash
@@ -19,17 +24,6 @@ app.get("/", async function(req, res){
     let data = await response.json();
     res.render("index", {"imageUrl": data.urls.small});
 });
-
-// Route for viewing favorite images
-app.get("/getKeywords",  function(req, res) {
-  let sql = "SELECT DISTINCT keyword FROM favorites ORDER BY keyword";
-  let imageUrl = ["img/favorite.png"];
-  pool.query(sql, function (err, rows, fields) {
-     if (err) throw err;
-     console.log(rows);
-     res.render("favorites", {"imageUrl": imageUrl, "rows":rows});
-  });  
-});//getKeywords
 
 // Search Route
 app.get("/search", async function(req, res){
@@ -68,11 +62,29 @@ app.get("/api/updateFavorites", function(req, res){
     res.send(rows.affectedRows.toString());
   });
     
-});//api/updateFavorites
-
-// Start server
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Express server is running...");
 });
+
+// Route for viewing favorite images
+app.get("/getKeywords", async function(req, res) {
+    let sql = "SELECT DISTINCT keyword FROM favorites ORDER BY keyword";
+    let imageUrl = [""];
+    pool.query(sql, function (err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+        res.render("favorites", {"imageUrl": imageUrl, "rows":rows});
+  });  
+});
+
+app.get("/api/getFavorites", function(req, res){
+  let sql = "SELECT imageURL FROM favorites WHERE keyword = ?";
+  let sqlParams = [req.query.keyword];  
+  pool.query(sql, sqlParams, function (err, rows, fields) {
+    if (err) throw err;
+    console.log(rows);
+    res.send(rows);
+  });
+    
+});//api/getFavorites
+
 
 
