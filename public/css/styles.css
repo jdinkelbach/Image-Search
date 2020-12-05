@@ -1,0 +1,30 @@
+body{
+    background-image: url("<%= imageUrl %>");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.img-frame{
+    background-color: white;
+    color: blue;
+    display: inline-block;
+    border: 10px solid white;
+    margin: 1%;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+}
+
+.favoriteIcon{
+    color: gray;
+    padding-top: 3%;
+}
+
+a{
+    color: rgb(255, 0, 0);
+}
+
+
+a:hover{
+    text-decoration: none;
+    color: red!important;
+}
