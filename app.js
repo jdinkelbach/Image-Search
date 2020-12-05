@@ -11,11 +11,6 @@ app.set("view engine", "ejs");
 // Identify public folder as the folder for all static files
 app.use(express.static("public"));
 
-// Start server
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Express server is running...");
-});
-
 // Routes
 app.get("/", async function(req, res){
     // Fetch random background from Unsplash
@@ -86,5 +81,9 @@ app.get("/api/getFavorites", function(req, res){
     
 });//api/getFavorites
 
+// Start server
+app.listen(process.env.PORT, process.env.IP, function(){
+    console.log("Express server is running...");
+});
 
 
